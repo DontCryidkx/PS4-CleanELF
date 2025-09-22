@@ -30,7 +30,7 @@ jobs:
          #ls -lR
          
     - name: Upload PS4-CleanELF.elf as artifact
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: PS4-CleanELF-elf-binary
         path: PS4-CleanELF.elf
