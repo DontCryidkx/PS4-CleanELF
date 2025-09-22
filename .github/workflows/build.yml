@@ -22,12 +22,18 @@ jobs:
     - name: Build project.elf with make
       run: make
 
-    - name: Create Release
-      run: |
-        echo "Aktuelles Verzeichnis:"
-        pwd
-        echo "Dateien und ordner (rekursiv):"
-        ls -lR
+    #- name: List files in workspace
+    #  run: |
+         #echo "Aktuelles Verzeichnis:"
+         #pwd
+         #echo "Dateien und ordner (rekursiv):"
+         #ls -lR
+         
+    - name: Upload PS4-CleanELF.elf as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: PS4-CleanELF-elf-binary
+        path: PS4-CleanELF.elf
    
 
   release:
@@ -39,11 +45,11 @@ jobs:
     - name: Download build artifact
       uses: actions/download-artifact@v4
       with:
-        name: project-elf-binary
+        name: PS4-CleanELF-elf-binary
 
     - name: Upload Release Asset
       uses: softprops/action-gh-release@v1
       with:
-        files: project.elf
+        files: PS4-CleanELF.elf
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
