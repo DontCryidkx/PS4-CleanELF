@@ -1,0 +1,47 @@
+name: Build PS4-CleanELF
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  release:
+    types: [published]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Install g++ Compiler
+      run: sudo apt-get update && sudo apt-get install -y g++
+
+    - name: Build project.elf with make
+      run: make
+
+    - name: Upload project.elf as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: project-elf-binary
+        path: project.elf
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.event_name == 'release'
+
+    steps:
+    - name: Download build artifact
+      uses: actions/download-artifact@v3
+      with:
+        name: project-elf-binary
+
+    - name: Upload Release Asset
+      uses: softprops/action-gh-release@v1
+      with:
+        files: project.elf
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
