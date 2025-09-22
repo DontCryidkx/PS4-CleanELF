@@ -24,10 +24,10 @@ jobs:
 
     - name: Create Release
       run: |
-	    echo "Aktuelles Verzeichnis:"
-	    pwd
-	    echo "Dateien und ordner (rekursiv):"
-	    ls -lR
+        echo "Aktuelles Verzeichnis:"
+        pwd
+        echo "Dateien und ordner (rekursiv):"
+        ls -lR
    
 
   release:
