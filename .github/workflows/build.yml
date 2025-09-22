@@ -22,7 +22,7 @@ jobs:
     - name: Build project.elf with make
       run: make
 
-    - name: List files in workspace
+    - name: Create Release
       run: |
 	    echo "Aktuelles Verzeichnis:"
 	    pwd
