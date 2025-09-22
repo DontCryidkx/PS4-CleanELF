@@ -1,4 +1,4 @@
-name: Build PS4-CleanELF
+name: Build PS4-CleanELF2
 
 on:
   push:
